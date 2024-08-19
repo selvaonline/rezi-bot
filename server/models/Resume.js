@@ -1,12 +1,23 @@
-import mongoose from 'mongoose';
+import { DataTypes } from "sequelize";
+import sequelize from "../config/database.js";
 
-const resumeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  experience: { type: Array, required: true },
-  education: { type: Array, required: true },
-  skills: { type: Array, required: true },
+const Resume = sequelize.define("Resume", {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  experience: {
+    type: DataTypes.JSONB, // Store experience as a JSONB object
+    allowNull: false,
+  },
+  education: {
+    type: DataTypes.JSONB, // Store education as a JSONB object
+    allowNull: false,
+  },
+  skills: {
+    type: DataTypes.ARRAY(DataTypes.STRING), // Store skills as an array of strings
+    allowNull: false,
+  },
 });
-
-const Resume = mongoose.model('Resume', resumeSchema);
 
 export default Resume;
